@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bnkop0w5ywhfe"]
+
+[ext_resource type="Shader" uid="uid://dtohfvnkxl04r" path="res://2D/world_position_texture/test_02/world_position_texture_graph.gdshader.res" id="1_yq5dc"]
+
+[resource]
+shader = ExtResource("1_yq5dc")

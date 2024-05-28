@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://jfhe27vt1pdi"]
+
+[ext_resource type="Shader" path="res://2D/world_position_texture/test_01/world_position_texture_01.gdshader" id="1_2hvo4"]
+[ext_resource type="Texture2D" uid="uid://51wqnmde4tcv" path="res://icon.svg" id="2_dv5dw"]
+
+[resource]
+shader = ExtResource("1_2hvo4")
+shader_parameter/color = Color(0.776471, 0.431373, 0.298039, 1)
+shader_parameter/main_s = ExtResource("2_dv5dw")
