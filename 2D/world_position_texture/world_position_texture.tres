@@ -10,6 +10,7 @@ fractal_type = 0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_woce4"]
 seamless = true
+seamless_blend_skirt = 0.532
 noise = SubResource("FastNoiseLite_hgmhm")
 
 [sub_resource type="Gradient" id="Gradient_gsjfu"]
@@ -37,4 +38,4 @@ shader_parameter/c_border_line_color = Color(1, 0.505882, 0.505882, 1)
 shader_parameter/c_border_line_splats_color = Color(0.607843, 0, 0, 1)
 shader_parameter/c_mix_border_line_colors_sampler = SubResource("NoiseTexture2D_woce4")
 shader_parameter/c_shadow_color = Color(0.894118, 0.54902, 0, 1)
-shader_parameter/c_shadow_line_color = Color(0.211765, 1, 0, 1)
+shader_parameter/c_shadow_line_color = Color(0.188235, 0, 0.333333, 1)
