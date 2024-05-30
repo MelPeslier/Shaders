@@ -1,0 +1,162 @@
+[gd_scene load_steps=17 format=3 uid="uid://ool48r6hbv6g"]
+
+[ext_resource type="Texture2D" uid="uid://ct46v1rn0vku5" path="res://art/textures/cave_wall/4/4_diffuseOriginal.bmp" id="1_mrrod"]
+[ext_resource type="Texture2D" uid="uid://dfiafl4e7o4fg" path="res://art/textures/cave_wall/4/4_ao.bmp" id="2_fqes1"]
+[ext_resource type="Texture2D" uid="uid://b2uecq1wg5s3p" path="res://art/textures/cave_wall/4/4_height.bmp" id="3_8u4xa"]
+[ext_resource type="Texture2D" uid="uid://bmvvpqhqiiapp" path="res://art/textures/cave_wall/4/4_metallic.bmp" id="4_1ww7t"]
+[ext_resource type="Texture2D" uid="uid://cpskaxboigx68" path="res://art/textures/cave_wall/4/4_normal.bmp" id="5_iojma"]
+[ext_resource type="Texture2D" uid="uid://l821mxxrqfgv" path="res://art/textures/cave_wall/4/4_smoothness.bmp" id="6_vud4p"]
+[ext_resource type="Material" uid="uid://cp473vnfcu1jt" path="res://3D/maps/standard_mat_vertex_displacement.tres" id="7_xsqwr"]
+
+[sub_resource type="Shader" id="Shader_k8sm5"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform sampler2D texture_normal : hint_roughness_normal,filter_linear_mipmap,repeat_enable;
+uniform float normal_scale : hint_range(-16,16);
+uniform sampler2D texture_ambient_occlusion : hint_default_white, filter_linear_mipmap,repeat_enable;
+uniform vec4 ao_texture_channel;
+uniform float ao_light_affect;
+uniform sampler2D texture_heightmap : hint_default_black,filter_linear_mipmap,repeat_enable;
+uniform float heightmap_scale;
+uniform int heightmap_min_layers;
+uniform int heightmap_max_layers;
+uniform vec2 heightmap_flip;
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+}
+
+
+
+
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	{
+		vec3 view_dir = normalize(normalize(-VERTEX + EYE_OFFSET) * mat3(TANGENT * heightmap_flip.x, -BINORMAL * heightmap_flip.y, NORMAL));
+		float depth = 1.0 - texture(texture_heightmap, base_uv).r;
+		vec2 ofs = base_uv - view_dir.xy * depth * heightmap_scale * 0.01;
+		base_uv=ofs;
+	}
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+	NORMAL_MAP = texture(texture_normal,base_uv).rgb;
+	NORMAL_MAP_DEPTH = normal_scale;
+	AO = dot(texture(texture_ambient_occlusion,base_uv),ao_texture_channel);
+	AO_LIGHT_AFFECT = ao_light_affect;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rtobo"]
+render_priority = 0
+shader = SubResource("Shader_k8sm5")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 1.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/ao_texture_channel = null
+shader_parameter/ao_light_affect = 0.0
+shader_parameter/heightmap_scale = 5.0
+shader_parameter/heightmap_min_layers = 8
+shader_parameter/heightmap_max_layers = 32
+shader_parameter/heightmap_flip = Vector2(1, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("1_mrrod")
+shader_parameter/texture_metallic = ExtResource("4_1ww7t")
+shader_parameter/texture_roughness = ExtResource("6_vud4p")
+shader_parameter/texture_normal = ExtResource("5_iojma")
+shader_parameter/texture_ambient_occlusion = ExtResource("2_fqes1")
+shader_parameter/texture_heightmap = ExtResource("3_8u4xa")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_injd5"]
+top_radius = 1.0
+bottom_radius = 1.0
+rings = 64
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_s4keb"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_lsr4l"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_mf6bp"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rnox1"]
+subdivide_width = 40
+subdivide_depth = 40
+
+[sub_resource type="BoxMesh" id="BoxMesh_olfrq"]
+subdivide_width = 40
+subdivide_height = 40
+subdivide_depth = 40
+
+[sub_resource type="QuadMesh" id="QuadMesh_y650k"]
+flip_faces = true
+
+[node name="Maps" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_rtobo")
+mesh = SubResource("CylinderMesh_injd5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.44538, 0, 0)
+material_override = ExtResource("7_xsqwr")
+mesh = SubResource("CylinderMesh_injd5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.84756, 0, 0)
+material_override = ExtResource("7_xsqwr")
+mesh = SubResource("CapsuleMesh_s4keb")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2524, 0, 0)
+material_override = ExtResource("7_xsqwr")
+mesh = SubResource("SphereMesh_lsr4l")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6878, 0, 0)
+material_override = ExtResource("7_xsqwr")
+mesh = SubResource("TorusMesh_mf6bp")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5376, 0, 0)
+material_override = ExtResource("7_xsqwr")
+mesh = SubResource("PlaneMesh_rnox1")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.0493, 0, 0)
+material_override = ExtResource("7_xsqwr")
+mesh = SubResource("BoxMesh_olfrq")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.9604, 0, 0)
+material_override = ExtResource("7_xsqwr")
+mesh = SubResource("QuadMesh_y650k")

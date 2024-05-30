@@ -1,0 +1,36 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://cp473vnfcu1jt"]
+
+[ext_resource type="Shader" path="res://3D/maps/standard_mat_vertex_displacement.gdshader" id="1_m26po"]
+[ext_resource type="Texture2D" uid="uid://ct46v1rn0vku5" path="res://art/textures/cave_wall/4/4_diffuseOriginal.bmp" id="2_wgpta"]
+[ext_resource type="Texture2D" uid="uid://dfiafl4e7o4fg" path="res://art/textures/cave_wall/4/4_ao.bmp" id="3_qoblg"]
+[ext_resource type="Texture2D" uid="uid://b2uecq1wg5s3p" path="res://art/textures/cave_wall/4/4_height.bmp" id="4_s3ylj"]
+[ext_resource type="Texture2D" uid="uid://bmvvpqhqiiapp" path="res://art/textures/cave_wall/4/4_metallic.bmp" id="5_hub2c"]
+[ext_resource type="Texture2D" uid="uid://cpskaxboigx68" path="res://art/textures/cave_wall/4/4_normal.bmp" id="6_yy186"]
+[ext_resource type="Texture2D" uid="uid://l821mxxrqfgv" path="res://art/textures/cave_wall/4/4_smoothness.bmp" id="7_key2q"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_m26po")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 1.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/ao_texture_channel = null
+shader_parameter/ao_light_affect = 0.0
+shader_parameter/heightmap_scale = 0.3
+shader_parameter/heightmap_min_layers = 8
+shader_parameter/heightmap_max_layers = 32
+shader_parameter/heightmap_flip = Vector2(1, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("2_wgpta")
+shader_parameter/texture_metallic = ExtResource("5_hub2c")
+shader_parameter/texture_roughness = ExtResource("7_key2q")
+shader_parameter/texture_normal = ExtResource("6_yy186")
+shader_parameter/texture_ambient_occlusion = ExtResource("3_qoblg")
+shader_parameter/texture_heightmap = ExtResource("4_s3ylj")
