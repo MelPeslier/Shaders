@@ -1,0 +1,38 @@
+[gd_scene load_steps=10 format=3 uid="uid://p0du02w6kyo2"]
+
+[ext_resource type="Shader" path="res://2D/maps/2d_mapping_like_3d.gdshader" id="1_i7d08"]
+[ext_resource type="Texture2D" uid="uid://ct46v1rn0vku5" path="res://art/textures/cave_wall/4/4_diffuseOriginal.bmp" id="2_pq8go"]
+[ext_resource type="Texture2D" uid="uid://dfiafl4e7o4fg" path="res://art/textures/cave_wall/4/4_ao.bmp" id="3_sqnu0"]
+[ext_resource type="Texture2D" uid="uid://b2uecq1wg5s3p" path="res://art/textures/cave_wall/4/4_height.bmp" id="4_h8kd4"]
+[ext_resource type="Texture2D" uid="uid://bmvvpqhqiiapp" path="res://art/textures/cave_wall/4/4_metallic.bmp" id="5_gglhn"]
+[ext_resource type="Texture2D" uid="uid://cpskaxboigx68" path="res://art/textures/cave_wall/4/4_normal.bmp" id="6_xrfuw"]
+[ext_resource type="Texture2D" uid="uid://l821mxxrqfgv" path="res://art/textures/cave_wall/4/4_smoothness.bmp" id="7_typjd"]
+[ext_resource type="Texture2D" uid="uid://c5ydmpyu4oe7w" path="res://art/white.png" id="8_qrtm1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcy4o"]
+shader = ExtResource("1_i7d08")
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 1.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/heightmap_scale = 1.0
+shader_parameter/heightmap_flip = Vector2(1, 1)
+shader_parameter/uv1_scale = Vector2(1, 1)
+shader_parameter/uv1_offset = Vector2(0, 0)
+shader_parameter/texture_albedo = ExtResource("2_pq8go")
+shader_parameter/texture_metallic = ExtResource("5_gglhn")
+shader_parameter/texture_roughness = ExtResource("7_typjd")
+shader_parameter/texture_normal = ExtResource("6_xrfuw")
+shader_parameter/texture_ambient_occlusion = ExtResource("3_sqnu0")
+shader_parameter/texture_heightmap = ExtResource("4_h8kd4")
+
+[node name="maps" type="Node2D"]
+
+[node name="CaveWall4" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tcy4o")
+texture = ExtResource("2_pq8go")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-640, 0)
+texture = ExtResource("8_qrtm1")
+texture_scale = 5.0
