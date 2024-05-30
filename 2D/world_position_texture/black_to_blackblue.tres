@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bunjltamdb2tu"]
+
+[ext_resource type="Shader" path="res://2D/world_position_texture/black_to_blackblue.gdshader" id="1_kr443"]
+
+[resource]
+shader = ExtResource("1_kr443")
