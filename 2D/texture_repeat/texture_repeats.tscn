@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://c4l280n3dd84w"]
+
+[ext_resource type="Texture2D" uid="uid://dr0lymqbwgk3m" path="res://art/custom_main_tex.png" id="1_r2fex"]
+[ext_resource type="Shader" uid="uid://fpvb4vj8qupl" path="res://2D/texture_repeat/_original.tres" id="1_s6ssu"]
+[ext_resource type="Shader" path="res://2D/texture_repeat/texture_repeats_rotation.gdshader" id="3_2vnlh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hpkw"]
+shader = ExtResource("1_s6ssu")
+
+[sub_resource type="Gradient" id="Gradient_8gfpe"]
+offsets = PackedFloat32Array(0.166667, 0.408497)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ochl"]
+noise_type = 2
+seed = 125
+frequency = 0.0006
+fractal_octaves = 4
+cellular_jitter = 0.45
+cellular_return_type = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u1gek"]
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_8gfpe")
+noise = SubResource("FastNoiseLite_0ochl")
+
+[sub_resource type="Gradient" id="Gradient_wem3n"]
+offsets = PackedFloat32Array(0.558824, 0.921569)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d310s"]
+noise_type = 2
+seed = 125
+frequency = 0.0006
+fractal_octaves = 4
+cellular_jitter = 0.45
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dm3r8"]
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_wem3n")
+noise = SubResource("FastNoiseLite_d310s")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o10e7"]
+shader = ExtResource("3_2vnlh")
+shader_parameter/p_tex_tiling = 1.0
+shader_parameter/p_tex_size = Vector2(512, 512)
+shader_parameter/rotation_noise = SubResource("NoiseTexture2D_dm3r8")
+shader_parameter/hide_rotation_noise_seams = SubResource("NoiseTexture2D_u1gek")
+
+[node name="TextureRepeats" type="Node2D"]
+
+[node name="Original" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_8hpkw")
+position = Vector2(-524, -5)
+texture = ExtResource("1_r2fex")
+
+[node name="Rotation" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_o10e7")
+texture = ExtResource("1_r2fex")

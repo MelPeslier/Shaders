@@ -67,7 +67,7 @@ void fragment() {
 
 
 // *** CUSTOM ***
-	vec2 c_tex_uv = p_tex_tiling / p_tex_size; // Define the uv size and stretch
+	vec2 c_tex_uv = c_tex_tiling / c_tex_size; // Define the uv size and stretch
 	vec2 c_world_uv = c_tex_uv * world_pos; // Apply size to world position to get world_uv
 	vec4 c_original_tex = texture(TEXTURE, UV);
 	vec4 c_final_tex = vec4( vec3(0.0), c_original_tex.a);
@@ -91,6 +91,12 @@ void fragment() {
 	float c_mix_main_color_splats = texture(c_mix_main_splats_sampler, c_world_uv).r;
 	c_main_tex.rgb = mix(c_main_tex.rgb, c_main_splats_color.rgb, c_mix_main_color_splats);
 
+	// * Mix outer elements from back buffer *
+	// TODO ______________ Add variations ? like a noise and it makes it smoothly mix or not
+	vec4 back_buffer_tex = texture(back_buffer_s, SCREEN_UV);
+	float bb_is_black = step(back_buffer_tex.r, EDGE_ZERO) * step(back_buffer_tex.g, EDGE_ZERO) * step(back_buffer_tex.b, EDGE_ZERO);
+	c_main_tex = mix(back_buffer_tex, c_main_tex, bb_is_black * back_buffer_tex.a);
+
 	// _ Then map this result to the correct 'original texture', here red(255)
 	c_final_tex.rgb = mix(c_final_tex.rgb, c_main_tex.rgb, c_original_tex.r); // Add result to the final texture output
 
@@ -103,12 +109,6 @@ void fragment() {
 	// TODO __ add choice between color and texture to it
 	vec4 c_shadow_line_tex = c_shadow_line_color * c_original_tex.g;
 	c_final_tex.rgb = mix(c_final_tex.rgb, c_shadow_line_color.rgb, c_original_tex.g);
-
-// * Mix outer elements from back buffer *
-	// TODO ______________ Add variations ? like a noise and it makes it smoothly mix or not
-	vec4 back_buffer_tex = texture(back_buffer_s, SCREEN_UV);
-	float bb_is_black = step(back_buffer_tex.r, EDGE_ZERO) * step(back_buffer_tex.g, EDGE_ZERO) * step(back_buffer_tex.b, EDGE_ZERO);
-	c_final_tex = mix(back_buffer_tex, c_final_tex, bb_is_black);
 // *** _____ ***
 
 

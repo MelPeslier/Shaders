@@ -1,0 +1,13 @@
+[gd_resource type="Shader" format=3 uid="uid://fpvb4vj8qupl"]
+
+[resource]
+code = "shader_type canvas_item;
+
+
+void fragment() {
+	vec2 uv = UV * 5.0;
+	vec3 tex = texture(TEXTURE, uv).rgb;
+	COLOR.rgb = tex;
+}
+
+"
