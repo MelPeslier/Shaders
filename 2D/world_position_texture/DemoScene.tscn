@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://r24xbu0xrxjg"]
+[gd_scene load_steps=27 format=3 uid="uid://r24xbu0xrxjg"]
 
 [ext_resource type="Material" uid="uid://bunjltamdb2tu" path="res://2D/world_position_texture/black_to_blackblue.tres" id="1_5ij1e"]
 [ext_resource type="Texture2D" uid="uid://c5ydmpyu4oe7w" path="res://art/white.png" id="1_c8je2"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://c824ag2tqexr3" path="res://art/red.png" id="6_p7s87"]
 [ext_resource type="Texture2D" uid="uid://be7m3pxkxryfe" path="res://art/terrain_material_tilemap.png" id="9_u7r70"]
 [ext_resource type="Texture2D" uid="uid://crk0ji67d1i34" path="res://art/textures/Blue_Nebula_08-1024x1024.png" id="9_xnqy0"]
+[ext_resource type="Shader" path="res://2D/world_position_texture/sdf_occluder_mapping.gdshader" id="13_04mhe"]
+[ext_resource type="Script" path="res://2D/world_position_texture/LightOccluder2D.gd" id="13_dpf1p"]
+[ext_resource type="Texture2D" uid="uid://dfiafl4e7o4fg" path="res://art/textures/cave_wall/4/4_ao.bmp" id="14_yhs2f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_owlq4"]
 texture = ExtResource("9_u7r70")
@@ -91,6 +94,119 @@ terrain_set_0/terrain_0/name = "Simple"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_owlq4")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1f0d5"]
+shader = ExtResource("13_04mhe")
+shader_parameter/p_c_d = 1.0
+shader_parameter/sdf_aim = 500.0
+shader_parameter/outer_line_color = Color(0, 0, 0, 1)
+shader_parameter/p_tex_tiling = 5.0
+shader_parameter/p_tex_size = Vector2(1000, 1000)
+shader_parameter/c_tex_tiling = 2.0
+shader_parameter/c_tex_size = Vector2(1000, 1000)
+shader_parameter/c_main_splats_color = Color(0, 0, 0, 1)
+shader_parameter/c_main_sampler = ExtResource("14_yhs2f")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eharx"]
+polygon = PackedVector2Array(728, 226, 762, 181, 799, 142, 867, 140, 913, 181, 921, 255, 891, 333, 809, 391, 739, 430, 673, 391, 610, 336, 563, 266, 537, 195, 550, 154, 591, 139, 643, 150, 698, 182)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a5y8i"]
+polygon = PackedVector2Array(799, 142, 867, 140, 948.705, 182.11, 974.117, 223.413, 979.764, 313.529, 909.176, 390.503, 793.411, 441.194, 677.646, 420.542, 590.117, 388.626, 508.235, 332.303, 553.411, 249.697, 590.117, 152.071, 717.176, 133.297)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i16qa"]
+polygon = PackedVector2Array(686.117, -16.8967, 828.37, 107.183, 1089.88, -43.1807, 921, 255, 1239.53, 429.929, 796.235, 388.626, 759.529, 538.819, 673, 391, 313.411, 512.536, 563, 266, -2.82349, 369.852, 550, 154)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ootu5"]
+polygon = PackedVector2Array(686.117, -16.8967, 828.37, 107.183, 913, 181, 921, 255, 891, 333, 809, 391, 739, 430, 673, 391, 610, 336, 563, 266, 537, 195, 550, 154)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_16vfs"]
+polygon = PackedVector2Array(686.117, -16.8967, 755.607, 134.091, 814.517, 240.04, 769.661, 322.06, 875.564, 368.551, 809, 391, 739, 430, 673, 391, 610, 336, 579.547, 274.258, 584.653, 199.214, 550, 154)
+
+[sub_resource type="Animation" id="Animation_5y10l"]
+resource_name = "new_animation"
+length = 7.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(430, 320), Vector2(746, 328)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:material:shader_parameter/outer_line_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 3, 4, 5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.266667, 0, 0, 1), Color(0, 0.203922, 0, 1), Color(0, 0, 0.552941, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hearth6:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2, 3.3, 4.7, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(358, -30), Vector2(495, 138), Vector2(283, 283), Vector2(358, -30)]
+}
+
+[sub_resource type="Animation" id="Animation_x51bf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(430, 320)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:material:shader_parameter/outer_line_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hearth6:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(358, -30)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_104b3"]
+_data = {
+"RESET": SubResource("Animation_x51bf"),
+"new_animation": SubResource("Animation_5y10l")
+}
+
 [node name="DemoScene" type="Node2D"]
 
 [node name="ElementsToMapInMaterials" type="Node2D" parent="."]
@@ -125,6 +241,21 @@ use_parent_material = true
 position = Vector2(1018, 330.5)
 texture = ExtResource("6_jgjfg")
 
+[node name="RuneBlackSlab036" type="Sprite2D" parent="ElementsToMapInMaterials/ElementsToMap"]
+use_parent_material = true
+position = Vector2(609, 297)
+texture = ExtResource("6_jgjfg")
+
+[node name="RuneBlackSlab037" type="Sprite2D" parent="ElementsToMapInMaterials/ElementsToMap"]
+use_parent_material = true
+position = Vector2(483, 389)
+texture = ExtResource("6_jgjfg")
+
+[node name="RuneBlackSlab038" type="Sprite2D" parent="ElementsToMapInMaterials/ElementsToMap"]
+use_parent_material = true
+position = Vector2(685, 80)
+texture = ExtResource("6_jgjfg")
+
 [node name="BlackMasks" type="Node2D" parent="ElementsToMapInMaterials"]
 
 [node name="BlackMask_001" type="Sprite2D" parent="ElementsToMapInMaterials/BlackMasks"]
@@ -141,6 +272,7 @@ copy_mode = 2
 [node name="Backgrounds" type="Node2D" parent="."]
 
 [node name="Background" type="Sprite2D" parent="Backgrounds"]
+visible = false
 self_modulate = Color(0.298039, 0.298039, 0.298039, 1)
 position = Vector2(-142, -1027)
 scale = Vector2(41.8672, 45.7266)
@@ -160,18 +292,18 @@ material = ExtResource("5_wscy5")
 use_parent_material = true
 tile_set = SubResource("TileSet_hmx4o")
 format = 2
-layer_0/tile_data = PackedInt32Array(524288, 65536, 1, 524289, 65536, 1, 524290, 65536, 1, 524291, 65536, 1, 524292, 65536, 1, 524293, 65536, 1, 458757, 65536, 0, 458756, 65536, 0, 458755, 65536, 0, 458754, 65536, 0, 458753, 65536, 0, 458752, 65536, 0, 524294, 65536, 1, 458758, 65536, 0, 524295, 65536, 1, 524296, 65536, 1, 524297, 65536, 1, 524298, 65536, 1, 524299, 65536, 1, 458763, 65536, 0, 458762, 65536, 0, 458761, 65536, 0, 458760, 65536, 0, 458759, 65536, 0, 458764, 65536, 0, 524300, 65536, 1, 524301, 65536, 1, 458765, 65536, 0, 524302, 65536, 1, 458766, 65536, 0, 524303, 65536, 1, 458767, 65536, 0, 458768, 65536, 0, 524304, 65536, 1, 589837, 65536, 1, 589836, 65536, 1, 589835, 65536, 1, 589834, 65536, 1, 589833, 65536, 1, 589832, 65536, 1, 589831, 65536, 1, 589830, 65536, 1, 589829, 65536, 1, 589828, 65536, 1, 589827, 65536, 1, 589826, 65536, 1, 589825, 65536, 1, 589824, 65536, 1, 655371, 65536, 2, 655372, 65536, 2, 655373, 65536, 2, 589838, 65536, 1, 589839, 65536, 1, 655365, 65536, 2, 655364, 65536, 2, 655363, 65536, 2, 655362, 65536, 2, 655361, 65536, 2, 655360, 65536, 2, 655366, 65536, 2, 655367, 65536, 2, 655368, 65536, 2, 655369, 65536, 2, 655370, 65536, 2, 655374, 65536, 2, 655375, 65536, 2, 655376, 65536, 2, 589840, 65536, 1, 458769, 65536, 0, 458770, 65536, 0, 524306, 65536, 1, 524305, 65536, 1, 589841, 65536, 1, 655377, 65536, 2, 655378, 65536, 2, 589842, 65536, 1, 589843, 65536, 1, 524307, 65536, 1, 458771, 65536, 0, 458772, 131072, 0, 524308, 131072, 1, 655379, 65536, 2, 655380, 131072, 2, 589844, 131072, 1, 524284, 0, 0, 524285, 65536, 0, 524286, 65536, 0, 524287, 65536, 0, 589820, 0, 1, 589821, 65536, 1, 589822, 65536, 1, 589823, 65536, 1, 655357, 65536, 1, 655358, 65536, 1, 655359, 65536, 1, 720893, 65536, 2, 720894, 65536, 2, 720895, 65536, 2, 655356, 0, 1, 720892, 0, 2, 65537, 0, 0, 131073, 0, 1, 131074, 65536, 1, 65538, 65536, 0, 131075, 131072, 1, 65539, 131072, 0, 196610, 65536, 2, 196609, 0, 2, 196611, 131072, 2)
+layer_0/tile_data = PackedInt32Array(524288, 65536, 1, 524289, 65536, 1, 524290, 65536, 1, 524291, 65536, 1, 524292, 65536, 1, 524293, 65536, 1, 458757, 65536, 0, 458756, 65536, 0, 458755, 65536, 0, 458754, 65536, 0, 458753, 65536, 0, 458752, 65536, 0, 524294, 65536, 1, 524295, 65536, 1, 524296, 65536, 1, 524297, 65536, 1, 524298, 65536, 1, 524299, 65536, 1, 458763, 65536, 0, 458762, 65536, 0, 458761, 65536, 0, 458764, 65536, 0, 524300, 65536, 1, 524301, 65536, 1, 458765, 65536, 0, 524302, 65536, 1, 458766, 65536, 0, 524303, 65536, 1, 458767, 65536, 0, 458768, 65536, 0, 524304, 65536, 1, 589837, 65536, 1, 589836, 65536, 1, 589835, 65536, 1, 589834, 65536, 1, 589833, 65536, 1, 589832, 65536, 1, 589831, 65536, 1, 589830, 65536, 1, 589829, 65536, 1, 589828, 65536, 1, 589827, 65536, 1, 589826, 65536, 1, 589825, 65536, 1, 589824, 65536, 1, 655371, 65536, 2, 655372, 65536, 2, 655373, 65536, 2, 589838, 65536, 1, 589839, 65536, 1, 655365, 65536, 2, 655364, 65536, 2, 655363, 65536, 2, 655362, 65536, 2, 655361, 65536, 2, 655360, 65536, 2, 655366, 65536, 2, 655367, 65536, 2, 655368, 65536, 2, 655369, 65536, 2, 655370, 65536, 2, 655374, 65536, 2, 655375, 65536, 2, 655376, 65536, 2, 589840, 65536, 1, 458769, 65536, 0, 458770, 65536, 0, 524306, 65536, 1, 524305, 65536, 1, 589841, 65536, 1, 655377, 65536, 2, 655378, 65536, 2, 589842, 65536, 1, 589843, 65536, 1, 524307, 65536, 1, 458771, 65536, 0, 458772, 131072, 0, 524308, 131072, 1, 655379, 65536, 2, 655380, 131072, 2, 589844, 131072, 1, 524284, 0, 0, 524285, 65536, 0, 524286, 65536, 0, 524287, 65536, 0, 589820, 0, 1, 589821, 65536, 1, 589822, 65536, 1, 589823, 65536, 1, 655357, 65536, 1, 655358, 65536, 1, 655359, 65536, 1, 720893, 65536, 2, 720894, 65536, 2, 720895, 65536, 2, 655356, 0, 1, 720892, 0, 2, 65537, 0, 0, 131073, 0, 1, 131074, 65536, 1, 65538, 65536, 0, 131075, 131072, 1, 65539, 131072, 0, 196610, 65536, 2, 196609, 0, 2, 196611, 131072, 2, 458758, 65536, 0, 458759, 65536, 0, 458760, 65536, 0, 327680, 65536, 1, 393215, 65536, 1, 393214, 65536, 1, 458750, 65536, 1, 458751, 65536, 1, 262144, 65536, 0, 327679, 65536, 0, 327678, 65536, 0, 327677, 0, 0, 393213, 0, 1, 458749, 0, 1)
 
 [node name="Hearth" type="Polygon2D" parent="World"]
 use_parent_material = true
-position = Vector2(694, 176.5)
+position = Vector2(870, 135)
 scale = Vector2(0.354167, 0.532646)
 texture = ExtResource("6_p7s87")
 polygon = PackedVector2Array(728, 226, 762, 181, 799, 142, 867, 140, 913, 181, 921, 255, 891, 333, 809, 391, 739, 430, 673, 391, 610, 336, 563, 266, 537, 195, 550, 154, 591, 139, 643, 150, 698, 182)
 
 [node name="RuneBlackSlab036" type="Sprite2D" parent="."]
 use_parent_material = true
-position = Vector2(162, 530)
+position = Vector2(138, 526)
 texture = ExtResource("6_jgjfg")
 
 [node name="Label" type="Label" parent="RuneBlackSlab036"]
@@ -187,3 +319,87 @@ offset_bottom = -87.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Not is elements to map"
+
+[node name="SDFMaterial" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_1f0d5")
+
+[node name="Hearth2" type="Polygon2D" parent="SDFMaterial"]
+use_parent_material = true
+position = Vector2(399, 128)
+scale = Vector2(0.354167, 0.532646)
+texture = ExtResource("1_c8je2")
+polygon = PackedVector2Array(728, 226, 762, 181, 799, 142, 867, 140, 913, 181, 921, 255, 891, 333, 809, 391, 739, 430, 673, 391, 610, 336, 563, 266, 537, 195, 550, 154, 591, 139, 643, 150, 698, 182)
+uv = PackedVector2Array(126.145, 102.654, 147.072, 74.9568, 169.846, 50.9523, 211.7, 49.7213, 240.013, 74.9568, 244.937, 120.504, 226.472, 168.513, 176.001, 204.212, 132.916, 228.217, 92.2928, 204.212, 53.5162, 170.36, 24.5876, 127.274, 8.5846, 83.5739, 16.5861, 58.3383, 41.8217, 49.1058, 73.8277, 55.8763, 107.68, 75.5723)
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="SDFMaterial/Hearth2" node_paths=PackedStringArray("parent")]
+visibility_layer = 0
+occluder = SubResource("OccluderPolygon2D_eharx")
+script = ExtResource("13_dpf1p")
+parent = NodePath("..")
+
+[node name="Hearth6" type="Polygon2D" parent="SDFMaterial"]
+use_parent_material = true
+position = Vector2(358, -30)
+scale = Vector2(0.354167, 0.532646)
+texture = ExtResource("1_c8je2")
+polygon = PackedVector2Array(799, 142, 867, 140, 948.705, 182.11, 974.117, 223.413, 979.764, 313.529, 909.176, 390.503, 793.411, 441.194, 677.646, 420.542, 590.117, 388.626, 508.235, 332.303, 553.411, 249.697, 590.117, 152.071, 717.176, 133.297)
+uv = PackedVector2Array(126.145, 102.654, 147.072, 74.9568, 169.846, 50.9523, 211.7, 49.7213, 240.013, 74.9568, 244.937, 120.504, 226.472, 168.513, 176.001, 204.212, 132.916, 228.217, 92.2928, 204.212, 53.5162, 170.36, 24.5876, 127.274, 8.5846, 83.5739, 16.5861, 58.3383, 41.8217, 49.1058, 73.8277, 55.8763, 107.68, 75.5723)
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="SDFMaterial/Hearth6" node_paths=PackedStringArray("parent")]
+visibility_layer = 0
+occluder = SubResource("OccluderPolygon2D_a5y8i")
+script = ExtResource("13_dpf1p")
+parent = NodePath("..")
+
+[node name="Hearth3" type="Polygon2D" parent="SDFMaterial"]
+use_parent_material = true
+position = Vector2(190, 209)
+scale = Vector2(0.354167, 0.532646)
+texture = ExtResource("6_p7s87")
+polygon = PackedVector2Array(686.117, -16.8967, 828.37, 107.183, 1089.88, -43.1807, 921, 255, 1239.53, 429.929, 796.235, 388.626, 759.529, 538.819, 673, 391, 313.411, 512.536, 563, 266, -2.82349, 369.852, 550, 154)
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="SDFMaterial/Hearth3" node_paths=PackedStringArray("parent")]
+show_behind_parent = true
+occluder = SubResource("OccluderPolygon2D_i16qa")
+script = ExtResource("13_dpf1p")
+parent = NodePath("..")
+
+[node name="Hearth4" type="Polygon2D" parent="SDFMaterial"]
+use_parent_material = true
+position = Vector2(532, -168)
+rotation = 1.17153
+scale = Vector2(0.354167, 0.532646)
+texture = ExtResource("6_p7s87")
+polygon = PackedVector2Array(686.117, -16.8967, 828.37, 107.183, 913, 181, 921, 255, 891, 333, 809, 391, 739, 430, 673, 391, 610, 336, 563, 266, 537, 195, 550, 154)
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="SDFMaterial/Hearth4" node_paths=PackedStringArray("parent")]
+show_behind_parent = true
+occluder = SubResource("OccluderPolygon2D_ootu5")
+script = ExtResource("13_dpf1p")
+parent = NodePath("..")
+
+[node name="Hearth5" type="Polygon2D" parent="SDFMaterial"]
+use_parent_material = true
+position = Vector2(430, 320)
+rotation = -1.59101
+scale = Vector2(0.354167, 0.532646)
+texture = ExtResource("6_p7s87")
+polygon = PackedVector2Array(686.117, -16.8967, 755.607, 134.091, 814.517, 240.04, 769.661, 322.06, 875.564, 368.551, 809, 391, 739, 430, 673, 391, 610, 336, 579.547, 274.258, 584.653, 199.214, 550, 154)
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="SDFMaterial/Hearth5" node_paths=PackedStringArray("parent")]
+show_behind_parent = true
+occluder = SubResource("OccluderPolygon2D_16vfs")
+script = ExtResource("13_dpf1p")
+parent = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../SDFMaterial/Hearth5")
+libraries = {
+"": SubResource("AnimationLibrary_104b3")
+}
+autoplay = "new_animation"
