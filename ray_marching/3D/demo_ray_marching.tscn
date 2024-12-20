@@ -1,19 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dub2sjtboaca0"]
+[gd_scene load_steps=7 format=3 uid="uid://dub2sjtboaca0"]
 
 [ext_resource type="Material" uid="uid://c7lpcd2s4kug0" path="res://ray_marching/3D/ray_marching_001_first_attempt.material" id="1_6w0ki"]
 [ext_resource type="Material" uid="uid://dnyk1tm2qpirn" path="res://ray_marching/3D/ray_marching_002_noise.material" id="2_6kgpx"]
 [ext_resource type="Material" uid="uid://bpx57b8422mq3" path="res://ray_marching/3D/ray_marching_003_try_own.material" id="2_y6yl1"]
-[ext_resource type="Shader" uid="uid://bvky5deckmag3" path="res://ray_marching/Canvas/ray_marching_004_canvas.gdshader" id="4_w5mxa"]
+[ext_resource type="Material" uid="uid://cqfi4ycqf0g0p" path="res://ray_marching/3D/ray_marching_004_canvas.material" id="4_w5mxa"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6kgpx"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bcmfm"]
-render_priority = 0
-shader = ExtResource("4_w5mxa")
-shader_parameter/camera = Vector3(0, 0, -4)
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_u4f82"]
-material = SubResource("ShaderMaterial_bcmfm")
+material = ExtResource("4_w5mxa")
 orientation = 2
 
 [node name="DemoRayMarching" type="Node3D"]

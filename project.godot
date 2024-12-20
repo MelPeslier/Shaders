@@ -15,10 +15,6 @@ config/tags=PackedStringArray("experiment", "learning")
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://godot_shader_icon.png"
 
-[display]
-
-window/size/viewport_width=648
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
