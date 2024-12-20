@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://jfhe27vt1pdi"]
 
-[ext_resource type="Shader" path="res://2D/world_position_texture/world_position_texture.gdshader" id="1_fhyqn"]
+[ext_resource type="Shader" uid="uid://c8eu2tkilrt4b" path="res://2D/world_position_texture/world_position_texture.gdshader" id="1_fhyqn"]
 [ext_resource type="Texture2D" uid="uid://ct46v1rn0vku5" path="res://art/textures/cave_wall/4/4_diffuseOriginal.bmp" id="2_i8int"]
 [ext_resource type="Texture2D" uid="uid://ccbp3yul4gcst" path="res://art/custom_main_secondary_tex.png" id="3_0xpeh"]
 
@@ -29,12 +29,12 @@ shader_parameter/p_tex_tiling = 1.0
 shader_parameter/p_tex_size = Vector2(128, 128)
 shader_parameter/c_tex_tiling = 1.0
 shader_parameter/c_tex_size = Vector2(128, 128)
-shader_parameter/c_main_splats_color = Color(0.162508, 1.8765e-05, 0.162506, 1)
 shader_parameter/c_main_sampler = ExtResource("2_i8int")
 shader_parameter/c_secondary_sampler = ExtResource("3_0xpeh")
 shader_parameter/c_mix_main_secondary_sampler = SubResource("NoiseTexture2D_i8wd8")
+shader_parameter/c_main_splats_color = Color(0.162508, 1.8765e-05, 0.162506, 1)
 shader_parameter/c_border_line_color = Color(0.207843, 0.25098, 0.25098, 1)
-shader_parameter/c_border_line_splats_color = Color(0.0431373, 0.0588235, 0.0470588, 1)
 shader_parameter/c_mix_border_line_colors_sampler = SubResource("NoiseTexture2D_uuoug")
+shader_parameter/c_border_line_splats_color = Color(0.0431373, 0.0588235, 0.0470588, 1)
 shader_parameter/c_shadow_color = Color(0.188235, 0, 0.333333, 1)
 shader_parameter/c_shadow_line_color = Color(0.188235, 0, 0.333333, 1)

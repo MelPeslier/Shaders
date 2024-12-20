@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dr0lymqbwgk3m" path="res://art/custom_main_tex.png" id="1_r2fex"]
 [ext_resource type="Shader" uid="uid://fpvb4vj8qupl" path="res://2D/texture_repeat/_original.tres" id="1_s6ssu"]
-[ext_resource type="Shader" path="res://2D/texture_repeat/texture_repeats_rotation.gdshader" id="3_2vnlh"]
+[ext_resource type="Shader" uid="uid://wu71mm5if207" path="res://2D/texture_repeat/texture_repeats_rotation.gdshader" id="3_2vnlh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8hpkw"]
 shader = ExtResource("1_s6ssu")

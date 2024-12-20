@@ -9,5 +9,4 @@ void fragment() {
 	vec3 tex = texture(TEXTURE, uv).rgb;
 	COLOR.rgb = tex;
 }
-
 "

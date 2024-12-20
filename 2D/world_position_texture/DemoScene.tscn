@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://c824ag2tqexr3" path="res://art/red.png" id="6_p7s87"]
 [ext_resource type="Texture2D" uid="uid://be7m3pxkxryfe" path="res://art/terrain_material_tilemap.png" id="9_u7r70"]
 [ext_resource type="Texture2D" uid="uid://crk0ji67d1i34" path="res://art/textures/Blue_Nebula_08-1024x1024.png" id="9_xnqy0"]
-[ext_resource type="Shader" path="res://2D/world_position_texture/sdf_occluder_mapping.gdshader" id="13_04mhe"]
-[ext_resource type="Script" path="res://2D/world_position_texture/LightOccluder2D.gd" id="13_dpf1p"]
+[ext_resource type="Shader" uid="uid://bvy7v5osmydye" path="res://2D/world_position_texture/sdf_occluder_mapping.gdshader" id="13_04mhe"]
+[ext_resource type="Script" uid="uid://bn8yv7a2crvid" path="res://2D/world_position_texture/LightOccluder2D.gd" id="13_dpf1p"]
 [ext_resource type="Texture2D" uid="uid://dfiafl4e7o4fg" path="res://art/textures/cave_wall/4/4_ao.bmp" id="14_yhs2f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_owlq4"]
@@ -103,23 +103,62 @@ shader_parameter/p_tex_tiling = 5.0
 shader_parameter/p_tex_size = Vector2(1000, 1000)
 shader_parameter/c_tex_tiling = 2.0
 shader_parameter/c_tex_size = Vector2(1000, 1000)
-shader_parameter/c_main_splats_color = Color(0, 0, 0, 1)
 shader_parameter/c_main_sampler = ExtResource("14_yhs2f")
+shader_parameter/c_main_splats_color = Color(0, 0, 0, 1)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eharx"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fjmef"]
 polygon = PackedVector2Array(728, 226, 762, 181, 799, 142, 867, 140, 913, 181, 921, 255, 891, 333, 809, 391, 739, 430, 673, 391, 610, 336, 563, 266, 537, 195, 550, 154, 591, 139, 643, 150, 698, 182)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a5y8i"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_octf1"]
 polygon = PackedVector2Array(799, 142, 867, 140, 948.705, 182.11, 974.117, 223.413, 979.764, 313.529, 909.176, 390.503, 793.411, 441.194, 677.646, 420.542, 590.117, 388.626, 508.235, 332.303, 553.411, 249.697, 590.117, 152.071, 717.176, 133.297)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i16qa"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fogwi"]
 polygon = PackedVector2Array(686.117, -16.8967, 828.37, 107.183, 1089.88, -43.1807, 921, 255, 1239.53, 429.929, 796.235, 388.626, 759.529, 538.819, 673, 391, 313.411, 512.536, 563, 266, -2.82349, 369.852, 550, 154)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ootu5"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cngeh"]
 polygon = PackedVector2Array(686.117, -16.8967, 828.37, 107.183, 913, 181, 921, 255, 891, 333, 809, 391, 739, 430, 673, 391, 610, 336, 563, 266, 537, 195, 550, 154)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_16vfs"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_80uho"]
 polygon = PackedVector2Array(686.117, -16.8967, 755.607, 134.091, 814.517, 240.04, 769.661, 322.06, 875.564, 368.551, 809, 391, 739, 430, 673, 391, 610, 336, 579.547, 274.258, 584.653, 199.214, 550, 154)
+
+[sub_resource type="Animation" id="Animation_x51bf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(430, 320)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:material:shader_parameter/outer_line_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Hearth6:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(358, -30)]
+}
 
 [sub_resource type="Animation" id="Animation_5y10l"]
 resource_name = "new_animation"
@@ -162,49 +201,10 @@ tracks/2/keys = {
 "values": [Vector2(358, -30), Vector2(495, 138), Vector2(283, 283), Vector2(358, -30)]
 }
 
-[sub_resource type="Animation" id="Animation_x51bf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(430, 320)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..:material:shader_parameter/outer_line_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Hearth6:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(358, -30)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_104b3"]
 _data = {
-"RESET": SubResource("Animation_x51bf"),
-"new_animation": SubResource("Animation_5y10l")
+&"RESET": SubResource("Animation_x51bf"),
+&"new_animation": SubResource("Animation_5y10l")
 }
 
 [node name="DemoScene" type="Node2D"]
@@ -334,7 +334,7 @@ metadata/_edit_group_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="SDFMaterial/Hearth2" node_paths=PackedStringArray("parent")]
 visibility_layer = 0
-occluder = SubResource("OccluderPolygon2D_eharx")
+occluder = SubResource("OccluderPolygon2D_fjmef")
 script = ExtResource("13_dpf1p")
 parent = NodePath("..")
 
@@ -349,7 +349,7 @@ metadata/_edit_group_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="SDFMaterial/Hearth6" node_paths=PackedStringArray("parent")]
 visibility_layer = 0
-occluder = SubResource("OccluderPolygon2D_a5y8i")
+occluder = SubResource("OccluderPolygon2D_octf1")
 script = ExtResource("13_dpf1p")
 parent = NodePath("..")
 
@@ -363,7 +363,7 @@ metadata/_edit_group_ = true
 
 [node name="LightOccluder2D2" type="LightOccluder2D" parent="SDFMaterial/Hearth3" node_paths=PackedStringArray("parent")]
 show_behind_parent = true
-occluder = SubResource("OccluderPolygon2D_i16qa")
+occluder = SubResource("OccluderPolygon2D_fogwi")
 script = ExtResource("13_dpf1p")
 parent = NodePath("..")
 
@@ -378,7 +378,7 @@ metadata/_edit_group_ = true
 
 [node name="LightOccluder2D2" type="LightOccluder2D" parent="SDFMaterial/Hearth4" node_paths=PackedStringArray("parent")]
 show_behind_parent = true
-occluder = SubResource("OccluderPolygon2D_ootu5")
+occluder = SubResource("OccluderPolygon2D_cngeh")
 script = ExtResource("13_dpf1p")
 parent = NodePath("..")
 
@@ -393,13 +393,13 @@ metadata/_edit_group_ = true
 
 [node name="LightOccluder2D2" type="LightOccluder2D" parent="SDFMaterial/Hearth5" node_paths=PackedStringArray("parent")]
 show_behind_parent = true
-occluder = SubResource("OccluderPolygon2D_16vfs")
+occluder = SubResource("OccluderPolygon2D_80uho")
 script = ExtResource("13_dpf1p")
 parent = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../SDFMaterial/Hearth5")
 libraries = {
-"": SubResource("AnimationLibrary_104b3")
+&"": SubResource("AnimationLibrary_104b3")
 }
 autoplay = "new_animation"

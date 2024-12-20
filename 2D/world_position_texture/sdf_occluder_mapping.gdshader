@@ -45,11 +45,11 @@ void vertex() {
 
 
 void fragment() {
-	
+
 	// * Get SDF from occluders *
 	vec2 sdf_pos = screen_uv_to_sdf(SCREEN_UV);
 	float sdf_value = texture_sdf(sdf_pos);
-	//float inside_sdf_mask = step(sdf_value, 0.0) ; 
+	//float inside_sdf_mask = step(sdf_value, 0.0) ;
 	float inner_sdf = -sdf_value * sdf_aim / 10000.0 ; //* inside_sdf_mask;
 
 // *** PROTOTYPE ***
